@@ -3,11 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
+	<dict/>
+	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>Diarista facil.xcscheme_^#shared#^_</key>
+		<key>61ABEE832F1F2D2300D92022</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>0</integer>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>61ABEE922F1F2D2400D92022</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>61ABEE9C2F1F2D2500D92022</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
