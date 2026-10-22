@@ -56,7 +56,6 @@
 				HistoryDetailView.swift,
 				HistoryView.swift,
 				HomeView.swift,
-				Item.swift,
 				LoginView.swift,
 				MainClientView.swift,
 				MarketplaceView.swift,
@@ -69,7 +68,6 @@
 				TimeSelectionView.swift,
 				UpcomingService.swift,
 				UpcomingServiceDetailView.swift,
-				"Videos/Limpando-pano.mov",
 			);
 			target = 61ABEE832F1F2D2300D92022 /* Diarista facil */;
 		};

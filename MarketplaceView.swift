@@ -11,7 +11,7 @@ struct MarketplaceView: View {
     @Namespace private var categoryNamespace
     @Environment(\.colorScheme) private var colorScheme
 
-    private let allProducts = MarketplaceProduct.sample
+    private let allProducts = MockDataService.shared.products()
 
     private var filteredProducts: [MarketplaceProduct] {
         var results = allProducts
@@ -736,7 +736,7 @@ struct MarketplaceProduct: Identifiable {
         CurrencyFormatter.string(from: price)
     }
 
-    static let sample: [MarketplaceProduct] = [
+    static let catalog: [MarketplaceProduct] = [
         MarketplaceProduct(
             name: "Kit Limpeza Profissional",
             description: "Inclui mop, balde, panos e borrifadores.",

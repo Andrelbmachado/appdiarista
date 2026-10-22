@@ -57,21 +57,17 @@ struct ServicePosting: Identifiable, Equatable {
 
 final class ServiceBoard: ObservableObject {
     @Published var postings: [ServicePosting]
-    
-    init(postings: [ServicePosting] = ServiceBoard.sampleData) {
+
+    init(repository: ServiceRepository = MockDataService.shared) {
+        self.postings = repository.servicePostings()
+    }
+
+    init(postings: [ServicePosting]) {
         self.postings = postings
     }
-    
+
     func addPosting(_ posting: ServicePosting) {
         postings.insert(posting, at: 0)
-    }
-    
-    private static var sampleData: [ServicePosting] {
-        [
-            ServicePosting(title: "Limpeza completa", address: "Av. Paulista, 1000", date: Date().addingTimeInterval(60 * 60 * 24), serviceTypes: ["Limpeza pesada", "Banheiros"], price: 220, coordinate: CLLocationCoordinate2D(latitude: -23.5617, longitude: -46.6559), notes: "Apartamento grande, trazer aspirador", clientRating: 4.8),
-            ServicePosting(title: "Faxina de rotina", address: "Rua das Flores, 245", date: Date().addingTimeInterval(60 * 60 * 48), serviceTypes: ["Limpeza padrão"], price: 180, coordinate: CLLocationCoordinate2D(latitude: -23.5672, longitude: -46.648), notes: "Preferência por produtos sem cheiro", clientRating: 4.6),
-            ServicePosting(title: "Pós-mudança", address: "Rua do Comércio, 18", date: Date().addingTimeInterval(60 * 60 * 72), serviceTypes: ["Limpeza pesada", "Janelas"], price: 260, coordinate: CLLocationCoordinate2D(latitude: -23.553, longitude: -46.639), notes: "Casa fechada por meses", clientRating: 4.9)
-        ]
     }
 }
 

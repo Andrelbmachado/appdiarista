@@ -9,13 +9,7 @@ import SwiftUI
 
 struct HistoryView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
-    @State private var services: [UpcomingService] = [
-        UpcomingService(cleanerName: "Maria Silva", date: Date().addingTimeInterval(86400 * 2), status: .pending, amount: 180, clientRating: 4.8, notes: "Levar aspirador."),
-        UpcomingService(cleanerName: "Ana Costa", date: Date().addingTimeInterval(86400 * 5), status: .accepted, amount: 220, clientRating: 4.6, notes: "Casa com criança pequena."),
-        UpcomingService(cleanerName: "Joana Pereira", date: Date().addingTimeInterval(86400 * 3), status: .denied, amount: 150, clientRating: 4.2, notes: "Prefere horário vespertino."),
-        UpcomingService(cleanerName: "Mariana Lopes", date: Date().addingTimeInterval(-86400 * 1), status: .finalized, amount: 200, clientRating: 4.9, notes: "Serviço concluído sem observações."),
-        UpcomingService(cleanerName: "Selma Araújo", date: Date().addingTimeInterval(-86400 * 4), status: .finalized, amount: 170, clientRating: 4.5, notes: "Precisa levar produtos próprios.")
-    ]
+    @State private var services: [UpcomingService] = MockDataService.shared.historyServices()
     
     var body: some View {
         NavigationStack {

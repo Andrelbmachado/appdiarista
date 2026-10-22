@@ -15,12 +15,7 @@ struct HomeView: View {
     @State private var searchText = ""
     @State private var showingFilter = false
     @State private var filterOptions = ServiceFilterOptions()
-    // Mock data for upcoming services
-    @State var upcomingServices: [UpcomingService] = [
-        UpcomingService(cleanerName: "Maria Silva", date: Date().addingTimeInterval(86400 * 2), status: .pending, amount: 180, clientRating: 4.7, notes: "Apartamento pequeno, trazer pano de chão."),
-        UpcomingService(cleanerName: "Ana Costa", date: Date().addingTimeInterval(86400 * 9), status: .accepted, amount: 220, clientRating: 4.9, notes: "Preferência por produtos sem cheiro."),
-        UpcomingService(cleanerName: "Joana Pereira", date: Date().addingTimeInterval(86400 * 5), status: .finalized, amount: 150, proofImageData: nil, clientRating: 4.5, notes: "Casa com pets.")
-    ]
+    @State var upcomingServices: [UpcomingService] = MockDataService.shared.upcomingServices()
     @State private var selectedServicePostingID: ServicePosting.ID?
     @State private var scheduledSearchText = ""
     @State private var showingScheduledFilter = false

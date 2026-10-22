@@ -26,8 +26,8 @@
 
 - **Apple Pay:** usa o merchant ID de exemplo `merchant.com.example.diaristafacil` e aprova a autorização localmente — não há processamento real nem repasse.
 - **Pix no carrinho:** o botão só mostra uma mensagem; não gera QR Code.
-- **Persistência:** `Item.swift` é o modelo SwiftData do template do Xcode e não está ligado ao app (não há `modelContainer`).
-- **Testes:** o projeto declara alvos de teste, mas ainda não há testes no repositório.
+- **Persistência:** nenhuma — os dados de exemplo vêm de `MockDataService` (em memória) e somem ao fechar o app. O backend real chega na Fase 1.
+- **Testes:** o projeto declara alvos de teste, mas ainda não há testes no repositório (falta o wire-up dos alvos no Xcode — ver [PLANO.md](PLANO.md)).
 
 ## 🔜 Planejado
 
@@ -63,3 +63,5 @@ Swift 5 · SwiftUI · Combine · MapKit · PhotosUI · PassKit (Apple Pay).
 ## Estrutura
 
 Todos os arquivos `.swift` ficam na raiz do repositório (ainda sem pastas por módulo). Estado global via `@EnvironmentObject`: `AuthViewModel` (sessão e perfil), `ServiceBoard` (serviços publicados) e `AppearanceSettings` (tema), criados em `Diarista_facilApp.swift`.
+
+Os dados de exemplo ficam em `MockDataService.swift`, atrás dos protocolos `AuthService`, `ServiceRepository` e `ProductRepository`. As telas e view models consomem esses protocolos — na Fase 1 basta trocar a implementação (Supabase) sem mexer na UI.

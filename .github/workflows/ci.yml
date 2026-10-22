@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build (iOS Simulator)
+    runs-on: macos-15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Versão do Xcode
+        run: xcodebuild -version
+
+      - name: Listar simuladores de iPhone disponíveis
+        run: xcrun simctl list devices available | grep -i iphone || true
+
+      # A Fase 0 do PLANO.md pede `xcodebuild test` com o esquema
+      # "Diarista facil". Enquanto os alvos de teste não têm fontes
+      # (precisam de wire-up no Xcode), o gate de CI é o build do app.
+      # Troque `build` por `test` assim que os testes existirem.
+      - name: Build do app
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project "Diarista facil.xcodeproj" \
+            -scheme "Diarista facil" \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            CODE_SIGNING_ALLOWED=NO
