@@ -11,11 +11,7 @@ import MapKit
 struct DiaristasListView: View {
     let criteria: DiaristaSearchCriteria
 
-    private let diaristas: [Diarista] = [
-        Diarista(name: "Maria Silva", age: 34, rating: 4.8, services: ["Limpeza Padrão", "Passar Roupa"], avatar: "person.fill", price: 180, coverageAreas: ["Rua das Flores", "Av. Paulista"]),
-        Diarista(name: "Joana Pereira", age: 28, rating: 4.5, services: ["Limpeza Pesada", "Limpeza de Vidros"], avatar: "person.crop.circle.fill", price: 230, coverageAreas: ["Centro", "Avenida Paulista"]),
-        Diarista(name: "Ana Costa", age: 42, rating: 5.0, services: ["Todos os serviços"], avatar: "person.crop.square.fill", price: 200, coverageAreas: ["Rua do Mercado", "Bairro Jardins"])
-    ]
+    private let diaristas: [Diarista] = MockDataService.shared.availableDiaristas()
 
     @State private var selectedDiaristaID: UUID?
     @Environment(\.dismiss) private var dismiss

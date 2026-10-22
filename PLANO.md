@@ -10,21 +10,23 @@ Cada fase só começa quando o **critério de pronto** da anterior estiver cumpr
 
 Objetivo: deixar o projeto fácil de evoluir e de verificar automaticamente.
 
-- [ ] Organizar arquivos em pastas no Xcode: `App/`, `Features/<Área>/`, `Models/`, `Services/`, `Resources/`.
-- [ ] Remover `Item.swift` (template SwiftData não usado).
-- [ ] Mover `Videos/Limpando-pano.mov` para Git LFS ou removê-lo se não for usado.
-- [ ] Extrair os dados de exemplo (`ServiceBoard.sampleData`, produtos do marketplace, contas demo) para um `MockDataService` atrás de protocolos (`AuthService`, `ServiceRepository`, `ProductRepository`) — o backend da Fase 1 só troca a implementação.
-- [ ] Criar testes unitários para `AuthViewModel`, `ServicePosting.matches(query:)` e `CurrencyFormatter`.
-- [ ] Criar 1 teste de UI: login como cliente → aba Home visível.
-- [ ] CI no GitHub Actions rodando `xcodebuild test -scheme "Diarista facil" -destination 'platform=iOS Simulator,name=iPhone 17'` em cada PR.
+- [ ] Organizar arquivos em pastas no Xcode: `App/`, `Features/<Área>/`, `Models/`, `Services/`, `Resources/`. — _adiado: o projeto usa pastas sincronizadas (`PBXFileSystemSynchronizedRootGroup`) e mover arquivos exige reescrever os caminhos em `membershipExceptions`; alto risco, baixo valor funcional. Melhor fazer na GUI do Xcode._
+- [x] Remover `Item.swift` (template SwiftData não usado). — arquivo e referência no `.pbxproj` removidos; nada mais referencia SwiftData.
+- [x] Mover `Videos/Limpando-pano.mov` para Git LFS ou removê-lo se não for usado. — removido (não referenciado no código), junto da entrada no `.pbxproj`.
+- [x] Extrair os dados de exemplo (`ServiceBoard.sampleData`, produtos do marketplace, contas demo) para um `MockDataService` atrás de protocolos (`AuthService`, `ServiceRepository`, `ProductRepository`) — o backend da Fase 1 só troca a implementação. — `MockDataService` criado; `AuthViewModel`, `ServiceBoard`, `HomeView`, `HistoryView`, `DiaristasListView` e `MarketplaceView` leem do serviço. Nenhuma tela declara mais arrays de exemplo.
+- [ ] Criar testes unitários para `AuthViewModel`, `ServicePosting.matches(query:)` e `CurrencyFormatter`. — _pendente: os alvos de teste existem no `.pbxproj` mas não têm pasta de fontes; é preciso criar o grupo de fontes do alvo no Xcode antes de adicionar os testes._
+- [ ] Criar 1 teste de UI: login como cliente → aba Home visível. — _pendente pelo mesmo motivo acima._
+- [x] CI no GitHub Actions rodando `xcodebuild test -scheme "Diarista facil" -destination 'platform=iOS Simulator,name=iPhone 17'` em cada PR. — workflow em `.github/workflows/ci.yml`. Enquanto não houver testes, o gate é `xcodebuild build` (trocar para `test` quando os testes existirem).
 
 **Pronto quando:** CI verde no `main`, app roda igual ao atual, nenhuma tela lê dados de exemplo diretamente.
+
+> **Status (2026-10-22):** refactor de dados mockados, limpeza (`Item.swift`, `.mov`) e CI feitos. Falta o wire-up dos alvos de teste no Xcode (unitários + UI) para fechar o critério de pronto. A decisão de backend (Supabase) foi registrada em [docs/decisoes.md](docs/decisoes.md).
 
 ## Fase 1 — Funcional no iPhone (MVP)
 
 Objetivo: cliente e diarista reais completam um serviço de ponta a ponta.
 
-- [ ] **Decidir backend** (Supabase recomendado: Auth + Postgres + Storage + Edge Functions). Registrar a decisão em `docs/decisoes.md`.
+- [x] **Decidir backend** (Supabase recomendado: Auth + Postgres + Storage + Edge Functions). Registrar a decisão em `docs/decisoes.md`. — decisão por Supabase registrada em [docs/decisoes.md](docs/decisoes.md).
 - [ ] Modelar tabelas: `profiles` (tipo cliente/diarista), `addresses`, `coverage_areas`, `services` (status: aberto → aceito → em andamento → concluído → pago), `service_photos`, `reviews`. Políticas RLS por usuário.
 - [ ] Auth real: cadastro (`RegistrationView`), login, logout, recuperação e troca de senha.
 - [ ] Cliente publica serviço com fotos (upload no Storage) → aparece para diaristas da região.
